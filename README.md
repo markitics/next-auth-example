@@ -1,5 +1,14 @@
 # NextAuth.js Example
 
+Setting default branch to be 'main', not 'master'.
+
+Set ENV VARIABLES in Vercel, [https://vercel.com/markitics/learning/settings/environment-variables](https://vercel.com/markitics/learning/settings/environment-variables)
+including EMAIL, DATABASE, TWITTER_ID, etc.
+
+...and then re-deploy.
+
+[learning-iota.vercel.app](learning-iota.vercel.app) assigned to this app for CI.
+
 [next-auth-example.now.sh](https://next-auth-example.now.sh)
 
 ## About this project

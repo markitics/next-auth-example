@@ -91,6 +91,11 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.navItem}>
+            <Link href="/payments">
+              <a>Payments</a>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
             <Link href="/api-example">
               <a>API</a>
             </Link>

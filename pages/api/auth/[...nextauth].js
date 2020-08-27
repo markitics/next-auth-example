@@ -37,9 +37,10 @@ const options = {
           image:
             "https://pbs.twimg.com/profile_images/652992187232309248/Ab1kw5e5.jpg",
           name: "Beautiful listener",
-          main_role_string: "listener",
+          mainRoleString: "listener",
           currency: "usd",
           username: "greatspeakertho",
+          isStaff: false,
           status: "a",
         };
 
@@ -84,10 +85,10 @@ const options = {
     //   clientId: process.env.GOOGLE_ID,
     //   clientSecret: process.env.GOOGLE_SECRET,
     // }),
-    Providers.Twitter({
-      clientId: process.env.TWITTER_ID,
-      clientSecret: process.env.TWITTER_SECRET,
-    }),
+    // Providers.Twitter({
+    //   clientId: process.env.TWITTER_ID,
+    //   clientSecret: process.env.TWITTER_SECRET,
+    // }),
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/database
@@ -129,6 +130,10 @@ const options = {
     // if you want to override the default behaviour.
     // encode: async ({ secret, token, maxAge }) => {},
     // decode: async ({ secret, token, maxAge }) => {},
+    verificationOptions: {
+      maxTokenAge: `${30 * 24 * 60 * 60}s`, // e.g. `${30 * 24 * 60 * 60}s` = 30 days
+      algorithms: ["HS512"],
+    },
   },
 
   // You can define custom pages to override the built-in pages.
@@ -158,13 +163,13 @@ const options = {
       if (isSignIn) {
         // By default, only name, email and image/picture are saved to jwt.
         // We need to manually specify if we want other
-        token.auth_time = Math.floor(Date.now() / 1000);
+        token.authTime = Math.floor(Date.now() / 1000);
         token.username = user.username;
         token.mood = user.mood;
-        token.main_role_string = user.main_role_string;
-        token.main_role_int = user.main_role_int;
+        token.mainRoleString = user.mainRoleString;
+        token.isStaff = user.isStaff;
         token.currency = user.currency;
-        token.user_id = user.id;
+        token.userId = user.id;
         token.status = user.status;
       }
       return Promise.resolve(token);

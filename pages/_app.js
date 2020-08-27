@@ -1,5 +1,7 @@
 import { Provider } from "next-auth/client";
+import { ToastContainer } from "react-toastify";
 import Header from "../components/header";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles.css";
 
 // Use the <Provider> to improve performance and allow components that call
@@ -26,6 +28,7 @@ export default function App({ Component, pageProps }) {
       }}
       session={pageProps.session}
     >
+      <ToastContainer autoClose={7000} />
       <Header />
       <Component {...pageProps} />
     </Provider>

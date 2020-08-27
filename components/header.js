@@ -7,6 +7,7 @@ import styles from "./header.module.css";
 // rendering, and avoids any flash incorrect content on initial page load.
 const Header = () => {
   const [session, loading] = useSession();
+  const user = session && session.user;
 
   return (
     <header>
@@ -45,7 +46,8 @@ const Header = () => {
               <span className={styles.signedInText}>
                 <small>Signed in as</small>
                 <br />
-                <strong>{session.user.email || session.user.name}</strong>
+                {user && user.name && <strong>{user.name}</strong>}
+                {user && user.email && <> ({user.email})</>}
               </span>
               <a
                 href={`/api/auth/signout`}

@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+// Next two lines to add custom user fields like role and currency
+// import Adapters from "next-auth/adapters";
+// import Models from "../../../models/User";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -27,11 +30,25 @@ const options = {
       },
       authorize: async (credentials) => {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: 1, name: "J Smith", email: "jsmith@example.com" };
+        const user = {
+          id: 1342,
+          email: "jsmith@fun.com",
+          mood: "super",
+          image:
+            "https://pbs.twimg.com/profile_images/652992187232309248/Ab1kw5e5.jpg",
+          name: "Beautiful listener",
+          main_role_string: "listener",
+          currency: "usd",
+          username: "greatspeakertho",
+          status: "a",
+        };
+
+        // NB: Only
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
-          return Promise.resolve(user);
+          return Promise.resolve(user); // only has email, 'name' isn't showing in jwt
+          // return user;
         } else {
           // If you return null or false then the credentials will be rejected
           return Promise.resolve(null);
@@ -134,6 +151,24 @@ const options = {
     // redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
     // session: async (session, user) => { return Promise.resolve(session) },
     // jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token) }
+    // Copying from https://next-auth.js.org/configuration/callbacks#jwt and https://github.com/nextauthjs/next-auth/issues/430#issuecomment-659303137
+    jwt: async (token, user, account, profile, isNewUser) => {
+      const isSignIn = user ? true : false;
+      // Add auth_time to token on signin in
+      if (isSignIn) {
+        // By default, only name, email and image/picture are saved to jwt.
+        // We need to manually specify if we want other
+        token.auth_time = Math.floor(Date.now() / 1000);
+        token.username = user.username;
+        token.mood = user.mood;
+        token.main_role_string = user.main_role_string;
+        token.main_role_int = user.main_role_int;
+        token.currency = user.currency;
+        token.user_id = user.id;
+        token.status = user.status;
+      }
+      return Promise.resolve(token);
+    },
   },
 
   // Events are useful for logging
@@ -141,7 +176,18 @@ const options = {
   events: {},
 
   // Enable debug messages in the console if you are having problems
-  debug: false,
+  debug: true,
+
+  // adapter: Adapters.TypeORM.Adapter(
+  //   // The first argument should be a database connection string or TypeORM config object
+  //   "postgres://username:password@databaseurl.aws.com:5432/databasename",
+  //   // The second argument can be used to pass custom models and schemas
+  //   {
+  //     models: {
+  //       User: Models.User,
+  //     },
+  //   }
+  // ),
 };
 
 export default (req, res) => NextAuth(req, res, options);

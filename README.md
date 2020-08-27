@@ -1,4 +1,4 @@
-# NextAuth.js Example
+# NextAuth.js Example - tweaking to use as test for new Awesound front-end app
 
 Setting default branch to be 'main', not 'master'.
 
@@ -8,7 +8,7 @@ including EMAIL, DATABASE, TWITTER_ID, etc.
 ...and then re-deploy.
 
 [learning-iota.vercel.app](learning-iota.vercel.app) assigned to this app for CI.
-
+bj
 [next-auth-example.now.sh](https://next-auth-example.now.sh)
 
 ## About this project
@@ -21,7 +21,7 @@ NextAuth.js is an easy to implement, full-stack (client/server) open source auth
 
 Go to [next-auth.js.org](https://next-auth.js.org) for more information and documentation.
 
-*NextAuth.js is not associated with Vercel or Next.js.*
+_NextAuth.js is not associated with Vercel or Next.js._
 
 ## Getting started
 
@@ -51,7 +51,7 @@ You can skip configuring a database and come back to it later if you want.
 
 When configuring your database you should also install an appropriate node_module.
 
-* **SQLite**
+- **SQLite**
 
   Install module:
   `npm i sqlite3`
@@ -59,7 +59,7 @@ When configuring your database you should also install an appropriate node_modul
   Database URI:
   `sqlite://localhost/:memory:?synchronize=true`
 
-* **MySQL**
+- **MySQL**
 
   Install module:
   `npm i mysql`
@@ -67,7 +67,7 @@ When configuring your database you should also install an appropriate node_modul
   Database URI:
   `mysql://username:password@127.0.0.1:3306/database_name?synchronize=true`
 
-* **Postgres**
+- **Postgres**
 
   Install module:
   `npm i pg`
@@ -75,7 +75,7 @@ When configuring your database you should also install an appropriate node_modul
   Database URI:
   `postgres://username:password@127.0.0.1:5432/database_name?synchronize=true`
 
-* **MongoDB**
+- **MongoDB**
 
   Install module:
   `npm i mongodb`
@@ -85,22 +85,22 @@ When configuring your database you should also install an appropriate node_modul
 
 Notes:
 
-* The example .env specifies an in-memory SQLite database that does not persist data.
-* SQLite is suitable for development / testing but not for production.
-* The option `?synchronize=true` automatically syncs schema changes to the database. It should not be used in production as may result in data loss if there are changes to the schema or to NextAuth.js
-* You can also specify a [TypeORM connection object](https://typeorm.io/#/connection-options) in `pages/api/auth/[...nextauth.js]` instead of a database URL / connection string.
+- The example .env specifies an in-memory SQLite database that does not persist data.
+- SQLite is suitable for development / testing but not for production.
+- The option `?synchronize=true` automatically syncs schema changes to the database. It should not be used in production as may result in data loss if there are changes to the schema or to NextAuth.js
+- You can also specify a [TypeORM connection object](https://typeorm.io/#/connection-options) in `pages/api/auth/[...nextauth.js]` instead of a database URL / connection string.
 
 ### 3. Configure authentication providers
 
-* Review and update options in `pages/api/auth/[...nextauth.js]` as needed.
+- Review and update options in `pages/api/auth/[...nextauth.js]` as needed.
 
-* When setting up OAUTH, in the developer admin page for each of your OAuth services, you should configure the callback URL to use a callback path of `{server}/api/auth/callback/{provider}`.
+- When setting up OAUTH, in the developer admin page for each of your OAuth services, you should configure the callback URL to use a callback path of `{server}/api/auth/callback/{provider}`.
 
   e.g. For Google OAuth you would use: `http://localhost:3000/api/auth/callback/google`
 
   A list of configured providers and their callback URLs is available from the endpoint `/api/auth/providers`. You can find more information at https://next-auth.js.org/configuration/providers
 
-* You can also choose to specify an SMTP server for passwordless sign in via email.
+- You can also choose to specify an SMTP server for passwordless sign in via email.
 
 ### 4. Start the application
 
@@ -128,4 +128,3 @@ To do this in on Vercel, you can use the [Vercel project dashboard](https://verc
     now env add NEXTAUTH_URL production
 
 Be sure to also set environment variables for the Client ID and Client Secret values for all your authentication providers.
-

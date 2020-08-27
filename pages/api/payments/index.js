@@ -6,24 +6,34 @@ import httpService from "../../../services/httpService";
 import { getSession } from "next-auth/client";
 
 const apiDomain = "https://local.awesound.com:8000";
-const apiPath = "api/next/payments";
+const apiPath = "/api/next/payments";
 const apiURL = apiDomain + apiPath;
 
-// async getPaymentsList() {
-//   // Replace that with a live version:
-//   const result = await httpService.get(apiURL);
-//   console.log(result);
-//   return result.data;
-// }
+const getPaymentsList = async (username) => {
+  const data = { username, mood: "super" }; // session.user.username
+  const result = await httpService.get(apiURL, { params: data });
+  // console.log(result);
+  return result.data;
+};
 
 export default async (req, res) => {
   const session = await getSession({ req });
 
   if (session) {
-    const payments = { payments: ["pay1", "pay2"], result: "success" };
     // const payments = { payments: ["pay1", "pay2"], result: "success" };
+    console.log("session is ", session);
+    console.log("user is ", session.user.email);
+    // session.user.username is not accessible, just name, email, image
+    const email = session.user.email; // "plabable";
+    const awesoundResult = await getPaymentsList(email);
+    // console.log(awesoundResult);
+    // const paymentsList = awesoundResult.payments_list;
+    // const payments = {
+    //   payments: paymentsList,
+    //   result: "success",
+    // };
     // toast("This is some json");
-    res.json(payments);
+    res.json(awesoundResult);
   } else {
     res.send({ result: "Access denied" });
   }

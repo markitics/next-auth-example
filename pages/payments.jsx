@@ -3,6 +3,7 @@ import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
 import { toast } from "react-toastify";
+import PaymentsList from "../components/PaymentsList/index";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -13,12 +14,12 @@ export default function Page() {
     const fetchPayments = async () => {
       const res = await fetch("/api/payments");
       const json = await res.json();
-      if (json.payments) {
+      if (json.payments_list) {
         toast.success(json.result);
-        setPayments(json.payments);
+        setPayments(json);
       } else if (json.result) {
         toast.error(json.result);
-        setPayments("No payments found");
+        // setPayments("No payments found");
       }
     };
     if (!payments) fetchPayments();
@@ -46,13 +47,7 @@ export default function Page() {
         You're signed in! (This page is private, you must be signed in to access
         it.)
       </p>
-      {payments && (
-        <ul>
-          {payments.map((pay) => (
-            <li>{pay}</li>
-          ))}
-        </ul>
-      )}
+      {payments && <PaymentsList payments={payments.payments_list} />}
     </Layout>
   );
 }

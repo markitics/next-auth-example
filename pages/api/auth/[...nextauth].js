@@ -4,6 +4,23 @@ import Providers from "next-auth/providers";
 // import Adapters from "next-auth/adapters";
 // import Models from "../../../models/User";
 
+const getUserJsFromDjango = (credentials) => {
+  const user = {
+    id: 1342,
+    email: credentials.email,
+    mood: "super",
+    image:
+      "https://pbs.twimg.com/profile_images/652992187232309248/Ab1kw5e5.jpg",
+    name: "Live listener",
+    mainRoleString: "listener",
+    currency: "usd",
+    username: "mcmmjones", // "plabable",
+    isStaff: false,
+    status: "a",
+  };
+  return user;
+};
+
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 const options = {
@@ -21,7 +38,7 @@ const options = {
       // You can specify whatever fields you are expecting to be submitted.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        username: {
+        email: {
           label: "Email",
           type: "text",
           placeholder: "name@gmail.com",
@@ -30,19 +47,20 @@ const options = {
       },
       authorize: async (credentials) => {
         // Add logic here to look up the user from the credentials supplied
-        const user = {
-          id: 1342,
-          email: "jsmith@fun.com",
-          mood: "super",
-          image:
-            "https://pbs.twimg.com/profile_images/652992187232309248/Ab1kw5e5.jpg",
-          name: "Beautiful listener",
-          mainRoleString: "listener",
-          currency: "usd",
-          username: "greatspeakertho",
-          isStaff: false,
-          status: "a",
-        };
+        // const user = {
+        //   id: 1342,
+        //   email: credentials.email,
+        //   mood: "super",
+        //   image:
+        //     "https://pbs.twimg.com/profile_images/652992187232309248/Ab1kw5e5.jpg",
+        //   name: "Beautiful listener",
+        //   mainRoleString: "listener",
+        //   currency: "usd",
+        //   username: "mcmmjones", // "plabable",
+        //   isStaff: false,
+        //   status: "a",
+        // };
+        const user = getUserJsFromDjango(credentials); // returns user object, or null
 
         // NB: Only
 

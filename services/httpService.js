@@ -26,6 +26,11 @@ axios.interceptors.response.use(null, (error) => {
   return Promise.reject(error);
 });
 
+// // At request level
+// const insecureAgent = new https.Agent({
+//   rejectUnauthorized: false,
+// });
+
 // Usage: when importing, write
 // import httpService from '/services/httpService'
 // then replace axios.get(url) with httpService.get(url)

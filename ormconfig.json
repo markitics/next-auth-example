@@ -1,0 +1,10 @@
+export = {
+  "type": "postgres",
+  "host": process.env.DJANGO_DATABASE_HOST,
+  "port": process.env.DJANGO_DATABASE_PORT,
+  "username": process.env.DJANGO_DATABASE_USERNAME,
+  "password": process.env.DJANGO_DATABASE_PASSWORD,
+  "database": process.env.DJANGO_DATABASE_NAME,
+  "synchronize": false,
+  "logging": false
+}

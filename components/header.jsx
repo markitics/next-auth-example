@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/client";
 import styles from "./header.module.css";
+import useSWR from "swr";
+import { useState, useEffect } from "react";
+import urls from "../urls";
 
 // The approach used in this component shows how to built a sign in and sign out
 // component that works on pages which support both client and server side
@@ -91,13 +94,18 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/payments">
-              <a>Payments</a>
+            <Link href="/payments-django">
+              <a>Payments-django</a>
             </Link>
           </li>
           <li className={styles.navItem}>
             <Link href="/api-example">
               <a>API</a>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href={urls.payments.djangoDirect}>
+              <a>Direct-from-Django</a>
             </Link>
           </li>
         </ul>

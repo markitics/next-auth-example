@@ -4,11 +4,18 @@ import Header from "../components/header";
 // import "reflect-metadata"; // for using TypeORM, see https://www.npmjs.com/package/typeorm#installation
 import "react-toastify/dist/ReactToastify.css";
 import "./styles.css";
+// const pg = require("pg");
+// import GlobalContext from "../context/globalContext";
 
 // Use the <Provider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
+
 export default function App({ Component, pageProps }) {
+  // const ourToken = "abcd.yo";
+  // localStorage.set("funToken", "lolz");
+
   return (
+    // <GlobalContext.Provider value={{ ourToken: ourToken }}>
     <Provider
       // Provider options are not required but can be useful in situations where
       // you have a short session maxAge time. Shown here with default values.
@@ -33,5 +40,6 @@ export default function App({ Component, pageProps }) {
       <Header />
       <Component {...pageProps} />
     </Provider>
+    // </GlobalContext.Provider>
   );
 }

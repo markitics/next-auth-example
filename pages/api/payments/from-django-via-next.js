@@ -6,19 +6,20 @@ import httpService from "../../../services/httpService";
 import { getSession } from "next-auth/client";
 
 const apiDomain = "https://local.awesound.com:8000";
-const apiPath = "/api/next/payments";
+const apiPath = "/api/next/payments-no-auth-test";
 const apiURL = apiDomain + apiPath;
 
 const getPaymentsList = async (username) => {
-  const data = { username, mood: "super" }; // session.user.username
+  const data = { username: "mcmmjones", mood: "super" }; // session.user.username
   const result = await httpService.get(apiURL, { params: data });
   // console.log(result);
+  result.data.note =
+    "This server-side Next serverless function in turn pings the Django api";
   return result.data;
 };
 
 export default async (req, res) => {
   const session = await getSession({ req });
-
   if (session) {
     // const payments = { payments: ["pay1", "pay2"], result: "success" };
     console.log("session is ", session);

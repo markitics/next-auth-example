@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import Header from "../components/header";
 // import "reflect-metadata"; // for using TypeORM, see https://www.npmjs.com/package/typeorm#installation
 import "react-toastify/dist/ReactToastify.css";
+import "antd/dist/antd.css";
 import "./styles.css";
 // const pg = require("pg");
 // import GlobalContext from "../context/globalContext";

@@ -146,10 +146,6 @@ class MusicPage extends Component {
     this.player = player;
   };
 
-  ref = (player) => {
-    this.player = player;
-  };
-
   // navigator.mediaSession.metadata = new MediaMetadata({
   //   title: "Fun track, yo!",
   //   artist: "Aman Arora",

@@ -104,6 +104,11 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.navItem}>
+            <Link href={urls.listen}>
+              <a>Listen</a>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
             <Link href={urls.payments.djangoDirect}>
               <a>Direct-from-Django</a>
             </Link>

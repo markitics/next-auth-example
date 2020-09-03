@@ -3,6 +3,7 @@ export default {
   payments: {
     djangoDirect: "/payments/from-django-direct",
   },
+  listen: "/music-react-player/index-rsf",
   api: {
     thisIsFor: "Django API endpoints",
     auth: process.env.NEXT_PUBLIC_API_ROOT + "/auth",
